@@ -1,8 +1,13 @@
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 import numpy as np
 from itertools import combinations
+import matplotlib.pyplot as plt  
 import time
 
-# --- 1. BUILD THE BASIS ---
 def sz0_basis(N):
     # This finds all states with total Sz=0 (half up, half down)
     n_up = N // 2
@@ -72,7 +77,7 @@ def r_statistics(evals):
 
 # --- 5. MAIN EXECUTION ---
 # Start with N=10 to ensure it works, then move to N=12
-N = 10
+N = int(input("enter the Number: "))
 print(f"=== PROJECT START: N={N} ===")
 
 # --- INTEGRABLE RUN ---
@@ -99,6 +104,76 @@ print(f"Integrable r: {rmean_int:.4f} (Target 0.386)")
 print(f"Chaotic r:    {rmean_chaos:.4f} (Target 0.536)")
 print("="*40)
 
-input("\nSuccess! Press Enter to exit...")
+
 # --- THE FINAL RESEARCH PLOT ---
 
+
+
+def build_xxz_hamiltonian(N, Delta=1.0, J2=0.0):
+    basis, index = sz0_basis(N)
+    dim = len(basis)
+    H = np.zeros((dim, dim), dtype=np.float64) 
+    h_field = 0.5  # Slightly stronger field for better chaos saturation
+
+    for idx, state in enumerate(basis):
+        H[idx, idx] += h_field * spin_z(state, 0) # Symmetry breaking defect
+        for i in range(N - 1): # Open Boundary Conditions
+            j = i + 1 
+            H[idx, idx] += Delta * spin_z(state, i) * spin_z(state, j)
+            if spin_z(state, i) != spin_z(state, j):
+                flipped = flip_spins(state, i, j)
+                H[idx, index[flipped]] += 2.0
+            if J2 != 0.0 and i < N - 2:
+                k = i + 2
+                if spin_z(state, i) != spin_z(state, k):
+                    flipped = flip_spins(state, i, k)
+                    H[idx, index[flipped]] += 2.0 * J2
+                H[idx, idx] += J2 * spin_z(state, i) * spin_z(state, k)
+    return H
+
+def r_statistics(evals):
+    spacings = np.diff(evals)
+    # We use a small epsilon 1e-12 to prevent division by zero
+    r_vals = np.minimum(spacings[:-1], spacings[1:]) / (np.maximum(spacings[:-1], spacings[1:]) + 1e-12)
+    return np.mean(r_vals)
+
+# --- THE PLOTTING EXECUTION ---
+def main():
+    # Use 12 for a quick test, 16 for your final data
+    j2_values = np.linspace(0.0, 1.0, 11) # 11 points from 0 to 1
+    r_results = []
+
+    print(f"--- Starting Sweep for N={N} ---")
+    for j2 in j2_values:
+        start_time = time.time()
+        H = build_xxz_hamiltonian(N, Delta=1.0, J2=j2)
+        evals = np.linalg.eigvalsh(H)
+        rmean = r_statistics(evals)
+        r_results.append(rmean)
+        print(f"J2={j2:.1f} | r={rmean:.4f} | Time: {time.time()-start_time:.2f}s")
+
+    # --- THE PLOTTING PART ---
+    plt.figure(figsize=(8, 5))
+    plt.plot(j2_values, r_results, 'bo-', linewidth=2, markersize=8, label=f'Simulation (N={N})')
+    
+    # Target Reference Lines
+    plt.axhline(y=0.386, color='green', linestyle='--', label='Poisson Limit (0.386)')
+    plt.axhline(y=0.536, color='red', linestyle='--', label='WD Limit (0.536)')
+
+    # Labels and Formatting
+    plt.title(f"Quantum Chaos Transition: N={N} Spin Chain", fontsize=14)
+    plt.xlabel("Next-Nearest Neighbor Interaction ($J_2$)", fontsize=12)
+    plt.ylabel("Mean $r$-parameter", fontsize=12)
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    
+    # IMPORTANT: This command opens the window!
+    print("Generating plot...")
+    plt.show() 
+
+# This line actually starts the whole process
+if __name__ == "__main__":
+    main()
+ #milan chapagainmmamda
+ #milan is hero
+ 
