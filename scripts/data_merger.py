@@ -6,11 +6,13 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pandas as pd # Library for data manipulation [cite: 407]
 import glob # Library to find files matching a pattern
+from src.model_spinchain import NNN, jxy, ising, nrealise
+from src.spectrum import frac
 
 def merge_results():
     # Find all CSV files in your results folder that look like L results
     # This assumes you saved your runs as 'results_L10.csv', 'results_L14.csv', etc.
-    all_files = glob.glob("results/data/results_L*.csv")
+    all_files = glob.glob(f"results/data/results_L*_J2_{NNN}_J{jxy}_Nr_{nrealise}__DELTA_{ising}_frac_{frac}.csv")
     
     # List to store dataframes
     df_list = []
@@ -26,7 +28,7 @@ def merge_results():
     master_df.sort_values(["L", "W"], inplace=True)
     
     # Save the combined data for the plotter to use
-    master_df.to_csv("results/data/fss_master_data.csv", index=False)
+    master_df.to_csv(f"results/data/fss_master_data_J2_{NNN}_J{jxy}_Nr_{nrealise}__DELTA_{ising}_frac_{frac}.csv", index=False)
     print("Master file created at results/fss_master_data.csv")
 
 if __name__ == "__main__":

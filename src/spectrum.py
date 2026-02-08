@@ -1,7 +1,7 @@
 import numpy as np
 
-
-def get_middle_spectrum(energies, fraction=0.5):
+frac = 0.5
+def get_middle_spectrum(energies, fraction=frac):
     """
     Extracts the central fraction of the spectrum.
 

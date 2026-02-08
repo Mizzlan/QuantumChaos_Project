@@ -7,7 +7,12 @@ import numpy as np
 from quspin.operators import hamiltonian
 from quspin.basis import spin_basis_1d
 
-def xxz_chain(L, J=1.0, Delta=1.0, W=0.0, J2=0.0, seed=None):
+NNN = 0.5
+ising = 1.0
+jxy = 1.0
+nrealise = 50
+
+def xxz_chain(L, J=jxy, Delta=ising, W=0.0, J2=NNN, seed=None):
     """
     Constructs the XXZ spin chain Hamiltonian.
     """
