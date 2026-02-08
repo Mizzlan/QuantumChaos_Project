@@ -32,7 +32,7 @@ for L in L_list:
 
         for seed in range(n_realizations):
             H = xxz_chain(L=L, Delta=ising, W=W, J2=NNN, seed=seed)
-            evals, evecs = H.eigvalsh()
+            evals, evecs = H.eigh()
             E_mid = get_middle_spectrum(evals, fraction=frac)
 
             r = r_statistic(E_mid, eps=EPS)
@@ -61,8 +61,8 @@ for L in L_list:
             "W": W,
             "mean_r": mean_r,
             "sem_r": sem_r,
-            "mean_ipr": mean_ipr
-            "sem_ipr": sem_ipr
+            "mean_ipr": mean_ipr,
+            "sem_ipr": sem_ipr,
             "n_valid": len(r_vals),
             "n_valid": n_valid
         })
