@@ -7,7 +7,7 @@ import numpy as np
 from quspin.operators import hamiltonian
 from quspin.basis import spin_basis_1d
 
-NNN = 0.0
+NNN = 0.5
 ising = 1.0
 jxy = 1.0
 nrealise = 50

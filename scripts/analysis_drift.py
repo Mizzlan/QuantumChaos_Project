@@ -43,4 +43,6 @@ plt.xlabel("1/L")
 plt.ylabel("$W_c(L)$")
 plt.title("Scaling Drift Analysis")
 plt.grid(True)
-plt.savefig("results/figures/wc_drift_analysis.png")
+
+plt.savefig("results/figures/wc_drift_analysis_j2_{jxy}.png")
+plt.show()

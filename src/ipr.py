@@ -2,21 +2,19 @@ import numpy as np
 
 def compute_ipr(evecs):
     """
-    Compute IPR for each eigenstate.
-    evecs: columns are eigenvectors
+    Computes IPR for each eigenstate.
+    IPR_n = sum_i |psi_n(i)|^4
     """
     return np.sum(np.abs(evecs)**4, axis=0)
 
 
-def mid_spectrum_indices(evals, fraction=0.2):
-    n = len(evals)
-    k = int(fraction * n)
-    start = n//2 - k//2
-    end = n//2 + k//2
-    return np.arange(start, end)
+def microcanonical_ipr(evals, evecs, fraction=0.5):
+    """
+    Computes mean IPR in the middle of the spectrum.
+    """
+    N = len(evals)
+    start = int((1 - fraction) / 2 * N)
+    end   = int((1 + fraction) / 2 * N)
 
-
-def disorder_averaged_ipr(evals, evecs, fraction=0.2):
-    idx = mid_spectrum_indices(evals, fraction)
-    ipr_vals = compute_ipr(evecs)
-    return np.mean(ipr_vals[idx])
+    ipr_vals = compute_ipr(evecs[:, start:end])
+    return np.mean(ipr_vals)
