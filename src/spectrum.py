@@ -58,3 +58,13 @@ def unfold_spectrum(energies, order=6):
     unfolded = np.polyval(coeffs, energies)
 
     return unfolded
+
+
+def mid_spectrum_indices(evals, fraction=0.2):
+    """
+    Returns indices corresponding to the middle fraction of the spectrum.
+    """
+    N = len(evals)
+    k = int(fraction * N)
+    center = N // 2
+    return np.arange(center - k // 2, center + k // 2)

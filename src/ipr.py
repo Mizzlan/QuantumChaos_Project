@@ -1,5 +1,14 @@
 import numpy as np
 
+def mean_ipr(evecs_subset):
+    """
+    Computes IPR for a subset of states.
+    IPR = sum(|psi|^4)
+    """
+    # Sum over the basis states (axis 0) for each eigenvector
+    # then take the mean over the number of eigenvectors in the subset.
+    return np.mean(np.sum(np.abs(evecs_subset)**4, axis=0))
+
 def compute_ipr(evecs):
     """
     Computes IPR for each eigenstate.
