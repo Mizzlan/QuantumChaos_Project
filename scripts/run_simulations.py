@@ -5,8 +5,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import numpy as np
 import pandas as pd
 
-from src.model_spinchain import xxz_chain
-from src.model_spinchain import NNN, jxy, ising, nrealise
+from model_spinchain00 import xxz_chain
+from model_spinchain00 import NNN, jxy, ising, nrealise
 from src.spectrum import get_middle_spectrum, frac
 from src.rstat import r_statistic
 from src.ipr import disorder_averaged_ipr

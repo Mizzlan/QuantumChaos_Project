@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from datetime import datetime
-from src.model_spinchain import NNN, jxy, ising, nrealise
+from model_spinchain00 import NNN, jxy, ising, nrealise
 from src.spectrum import frac
 
 def run_fss_plotting():

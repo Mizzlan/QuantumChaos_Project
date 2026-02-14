@@ -9,7 +9,7 @@ from src.plotting import set_publication_style
 
 # -------------------- PARAMETERS --------------------
 # Using your specific master filename
-INPUT_FILE = "data/master_fss_data_L[8,10,12,14]_J2[0.0,0.5]_NE50.csv"
+INPUT_FILE = "results/data/research_run_L14_J20.0_N60_k300.csv"
 # ----------------------------------------------------
 
 def plot_spectral_statistics():
@@ -61,9 +61,9 @@ def plot_spectral_statistics():
         
         
         # 8. Save output
-        os.makedirs("results/figures", exist_ok=True)
+        os.makedirs("results/figures/test", exist_ok=True)
         # Saving as PDF for vector quality in reports
-        save_path = f"results/figures/r_vs_W_J2_{J2}.pdf"
+        save_path = f"results/figures/test/r_vs_W_J2_{J2}.pdf"
         plt.savefig(save_path)
         plt.show()
         print(f"✅ Saved spectral plot to: {save_path}")

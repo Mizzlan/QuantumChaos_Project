@@ -4,7 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from tqdm import tqdm
 import pandas as pd
 
-from src.model_spinchain import xxz_chain
+from model_spinchain00 import xxz_chain
 from src.rstat import r_statistic
 from src.ipr import mean_ipr
 from src.spectrum import mid_spectrum_indices

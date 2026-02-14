@@ -1,4 +1,4 @@
-from src.model_spinchain import build_xxz_chain
+from model_spinchain00 import build_xxz_chain
 from src.spectrum import get_sorted_eigenvalues
 from src.rstat import r_statistic
 

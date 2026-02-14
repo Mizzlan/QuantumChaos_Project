@@ -10,7 +10,7 @@ from scipy.optimize import curve_fit
 from scipy.stats import chi2
 
 # -------------------- USER PARAMETERS --------------------
-DATA_PATH = "data/master_fss_data_L[8,10,12,14]_J2[0.0,0.5]_NE50.csv"
+DATA_PATH = "results/data/research_run_L12_J20.5_N100_k250.csv"
 R_STAR = 0.458  # Midpoint between GOE and Poisson
 N_BOOT = 2000   # Bootstrap samples
 # ---------------------------------------------------------
@@ -83,7 +83,7 @@ def main():
         return
 
     df = pd.read_csv(DATA_PATH)
-    os.makedirs("results/figures", exist_ok=True)
+    os.makedirs("results/figures/test", exist_ok=True)
 
     for J2 in sorted(df["J2"].unique()):
         print("\n==============================")
@@ -172,7 +172,7 @@ def main():
         plt.legend(frameon=False)
         plt.tight_layout()
 
-        plt.savefig(f"results/figures/Wc_scaling_J2_{J2}.pdf")
+        plt.savefig(f"results/figures/test/Wc_scaling_J2_{J2}.pdf")
         plt.show()
 
 # ---------------------------------------------------------

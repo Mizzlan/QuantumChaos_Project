@@ -2,7 +2,7 @@ import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import numpy as np
-from src.model_spinchain import xxz_chain
+from model_spinchain00 import xxz_chain
 
 # PARAMETERS
 L_list = [8, 10, 12, 14]

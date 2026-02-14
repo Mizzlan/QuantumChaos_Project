@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pandas as pd # Library for data manipulation [cite: 407]
 import glob # Library to find files matching a pattern
-from src.model_spinchain import NNN, jxy, ising, nrealise
+from model_spinchain00 import NNN, jxy, ising, nrealise
 from src.spectrum import frac
 
 def merge_results():

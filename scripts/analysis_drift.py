@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from src.finite_size import extract_wc, extract_vL
-from src.model_spinchain import NNN, jxy, ising, nrealise
+from model_spinchain00 import NNN, jxy, ising, nrealise
 from src.spectrum import frac
 # --- PARAMETERS (Keep consistent with simulation) ---
 L_list = [8, 10, 12]
